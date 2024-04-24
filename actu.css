@@ -1,5 +1,6 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Times New Roman', sans-serif;
+    
 }
 
 header {
@@ -37,6 +38,16 @@ nav {
 .article {
     margin: 10px;
     padding: 10px;
+    margin-bottom: 20px;
     border: 1px solid black;
     border-radius: 10px;
+    text-align: justify;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 17px;
 }
+
+.article:active {
+    transform: scale(1.1);
+    border: 2px solid red;
+}
+
