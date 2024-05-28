@@ -17,7 +17,7 @@
 
                     <!-- Lien vers la page d'accueil -->
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Accueil</a>
+                        <a class="nav-link" id="accueil-link" href="http://localhost/site_actu_21/Vue/">Accueil</a>
                     </li>
 
                     <!-- Vérification si la variable $categories est définie -->
@@ -26,7 +26,7 @@
                         <!-- Boucle sur chaque catégorie dans le tableau $categories -->
                         <?php foreach ($categories as $categorie) : ?>
                             
-                            <!-- Lien vers la page de la catégorie -->
+                            <!-- Lien vers la page de la catégorie avec l'ID correctement encodé -->
                             <li class="nav-item">
                                 <a class="nav-link" href="index.php?action=categorie&id=<?= $categorie->getId()?>"><?= $categorie->getLibelle() ?></a>
                             </li>

@@ -1,8 +1,7 @@
 <?php
   // Inclusion du fichier index.php qui contient les configurations initiales et la récupération des données
-  require_once('index.php');
+  require_once 'index.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -13,7 +12,7 @@
 
     <!-- Inclusion des styles CSS de Bootstrap et du fichier de style personnalisé -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="../assets/style.css" />
+    <link rel="stylesheet" href="../assets/css/style.css"/>
 
     <!-- Titre de la page -->
     <title>ACTUALITÉS POLYTECHNICIENNES</title>
@@ -29,7 +28,7 @@
     <div class="container mt-4" id="articlesContainer">
 
       <!-- Vérification si la variable $articles est définie, est un tableau et contient des éléments -->
-      <?php if(isset($articles) && is_array($articles)) { ?>
+      <?php if(isset($articles) && is_array($articles)  && !empty($articles)) { ?>
 
         <!-- Boucle sur chaque article dans le tableau $articles -->
         <?php foreach ($articles as $article) { ?>

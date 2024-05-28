@@ -1,7 +1,6 @@
 <?php
     // Définition de la classe Categorie
 
-
     class Categorie {
 
         private $id; // Identifiant de la catégorie

@@ -9,7 +9,6 @@
 
         // Constructeur de la classe
 
-
         public function __construct() {
 
             // Création d'une nouvelle connexion PDO
@@ -23,7 +22,6 @@
 
             // Configuration de la connexion
 
-
             $this->connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Activation des exceptions
 
             $this->connexion->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // Mode de récupération par défaut
@@ -34,7 +32,6 @@
 
         
         // Méthode pour obtenir la connexion
-
 
         public static function getConnexion() {
 

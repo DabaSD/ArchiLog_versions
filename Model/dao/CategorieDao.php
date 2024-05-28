@@ -1,7 +1,7 @@
 <?php
     // Importation des classes nécessaires
-    require_once 'ConnexionManager.php'; 
-    require_once '../Domaine/Categorie.php'; 
+    require_once '../Model/dao/ConnexionManager.php'; 
+    require_once '../Model/domaine/Categorie.php'; 
 
 
 
@@ -20,7 +20,6 @@
 
 
         // Méthode pour récupérer une catégorie par son id
-
 
         public function getCategorieById($id) {
 
@@ -45,7 +44,6 @@
 
         // Méthode pour récupérer toutes les catégories
 
-        
         public function getCategories() {
 
             // Préparation de la requête SQL

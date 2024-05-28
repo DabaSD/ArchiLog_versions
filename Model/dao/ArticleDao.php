@@ -1,12 +1,13 @@
 <?php
     // Importation des classes nécessaires
-    require_once 'ConnexionManager.php'; 
-    require_once '../Domaine/Article.php'; 
-    require_once '../Domaine/Categorie.php'; 
+    require_once '../Model/dao/ConnexionManager.php'; 
+    require_once  '../Model/domaine/Article.php'; 
+    require_once  '../Model/domaine/Categorie.php'; 
 
 
 
     // Définition de la classe ArticleDao
+    
     class ArticleDao {
         
         private $connexion; // Variable pour stocker la connexion à la base de données
@@ -21,7 +22,6 @@
 
 
         // Méthode pour récupérer un article par son id
-
 
         public function getArticleById($id) {
 
@@ -44,7 +44,6 @@
 
         // Méthode pour récupérer tous les articles
 
-
         public function getArticles() {
 
             // Préparation de la requête SQL
@@ -66,10 +65,8 @@
 
 
 
-
         // Méthode pour récupérer tous les articles d'une catégorie spécifique
 
-        
         public function getArticlesByCategorieId($id) {
 
             // Préparation de la requête SQL

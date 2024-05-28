@@ -1,8 +1,8 @@
 <?php
     // Importation des classes nécessaires
-    require_once '../Dao/ConnexionManager.php';
-    require_once '../Dao/ArticleDao.php'; 
-    require_once '../Dao/CategorieDao.php'; 
+    require_once  '../Model/dao/ConnexionManager.php';
+    require_once  '../Model/dao/ArticleDao.php'; 
+    require_once  '../Model/dao/CategorieDao.php'; 
 
     // Définition de la classe Controller
     class Controller {

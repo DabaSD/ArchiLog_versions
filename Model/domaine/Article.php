@@ -14,7 +14,6 @@
 
         // Constructeur de la classe
 
-
         public function __construct($id, $titre, $contenu, $categorie, $dateCreation, $dateModification) {
             $this->id = $id;
             $this->titre = $titre;
@@ -25,7 +24,6 @@
         }
 
         // Getters
-
 
         public function getId() {
             return $this->id;
@@ -53,7 +51,6 @@
 
         // Setters
 
-        
         public function setId($id) {
             $this->id = $id;
         }
