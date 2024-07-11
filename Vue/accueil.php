@@ -46,7 +46,19 @@
                     </h5>
                     <h6 class="card-subtitle mb-2 text-muted" small-date><?php echo $article->getDateCreation(); ?></h6>
                     <p class="card-text"><?php echo $article->getContenu(); ?></p>
-                    <?php } ?>
+                    
+
+
+                    <!-- Boutons d'action pour les éditeur php //if ($userRole === 'éditeur'): ?s -->
+                    
+                        <div class="mt-3">
+                            <a href="modifier_article.php?id=<?php echo $article->getId(); ?>" class="btn btn-primary mr-2">Modifier</a>
+                            <button type="button" class="btn btn-danger" onclick="confirmDelete(<?php echo $article->getId(); ?>)">Supprimer</button>
+                        </div>
+                     <!--php //endif; ?> -->
+
+                     <?php } ?>
+
                 </div>
             </div>
         </div>
