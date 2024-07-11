@@ -1,0 +1,41 @@
+header {
+  background-color: #4a4a4a;
+  padding: 20px 0;
+  text-align: center;
+  color: #fff;
+}
+nav a {
+  margin: 0 10px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.custom-card {
+  background-color: whitesmoke; /* Fond jaune pour chaque carte */
+  border: 1px solid #b6d8fa; /* Bordure violette */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  text-align: justify; 
+}
+
+.custom-card:hover {
+  transform: scale(1.05);
+  background-color: rgb(200, 200, 200); /* Fond jaune clair au survol */
+  border: 1px solid red ;
+}
+
+.card-title {
+  font-family: 'Lora', sans-serif; /* Changer la police du titre */
+  font-weight: 700; /* Mettre en gras le titre */
+  color: #3e2723; /* Couleur marron pour le titre */
+}
+
+.card-text {
+  font-family: 'Calibri', sans-serif; /* Changer la police du texte */
+  color: #424242; /* Couleur gris foncé pour le texte */
+}
+
+.small-date {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 10px;
+}
