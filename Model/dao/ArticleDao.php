@@ -95,5 +95,15 @@ class ArticleDao {
     public function getLastInsertedId() {
         return $this->connexion->lastInsertId();
     }
+
+
+
+    public function supprimerArticle($id) {
+        $sql = "DELETE FROM article WHERE id = :id";
+        $stmt = $this->connexion->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+    
 }
 ?>

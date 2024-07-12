@@ -14,6 +14,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/css/style.css"/>
 
+    <!-- Inclusion de SweetAlert CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">
+
+    <!-- Inclusion de SweetAlert JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.all.min.js"></script>
+
+
     <!-- Titre de la page -->
     <title>ACTUALITÉS POLYTECHNICIENNES</title>
 
@@ -118,6 +125,25 @@
       <?php } ?>
     </div>
 
+    <script>
+    function confirmDelete(articleId) {
+        Swal.fire({
+            title: 'Êtes-vous sûr de vouloir supprimer cet article ?',
+            text: "Cette action est irréversible !",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Oui, supprimer',
+            cancelButtonText: 'Annuler'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirection vers la page de suppression avec l'ID de l'article à supprimer
+                window.location.href = 'supprimer_article.php?id=' + articleId;
+            }
+        });
+    }
+</script>
 
 
     
