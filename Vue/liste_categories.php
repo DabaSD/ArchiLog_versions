@@ -41,7 +41,7 @@ require_once '../Controleur/categories_controller.php';
                                     <td><?php echo $categorie->getId(); ?></td>
                                     <td><?php echo htmlspecialchars($categorie->getLibelle()); ?></td>
                                     <td>
-                                        <a href="modifier_categorie.php?id=<?php echo $categorie->getId(); ?>" class="btn btn-primary btn-sm mr-2">Modifier</a>
+                                        <a href="modifier_categorie.php?id=<?php echo $categorie->getId(); ?>" class="btn btn-warning btn-sm mr-2">Modifier</a>
                                         <button class="btn btn-danger btn-sm" onclick="confirmDelete(<?php echo $categorie->getId(); ?>)">Supprimer</button>
                                     </td>
                                 </tr>

@@ -27,7 +27,7 @@ require_once '../Controleur/modifier_categorie_controller.php';
                         <input type="text" class="form-control" id="libelle" name="libelle" value="<?php echo htmlspecialchars($categorie->getLibelle()); ?>" required>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Modifier</button>
+                        <button type="submit" class="btn btn-warning">Modifier</button>
                         <a href="liste_categories.php" class="btn btn-secondary">Annuler</a>
                     </div>
                 </form>

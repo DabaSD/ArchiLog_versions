@@ -50,7 +50,7 @@ require_once '../Controleur/modifier_article_controller.php';
                         ?>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                <button type="submit" class="btn btn-warning">Enregistrer les modifications</button>
                 <a href="article_detail.php?action=article&id=<?php echo $articleId; ?>" class="btn btn-secondary">Annuler</a>
             </form>
         </div>
