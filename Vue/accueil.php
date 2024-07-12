@@ -24,6 +24,16 @@
     <!-- Inclusion de l'entête du site -->
     <?php require_once 'entete.php'; ?>
 
+            <!-- Bouton Ajouter un article -->
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <a href="ajouter_article.php" class="btn btn-primary">Ajouter un article</a>
+        </div>
+    </div>
+</div>
+
+
     <!-- Conteneur principal pour les articles -->
     <div class="container mt-4" id="articlesContainer">
 
@@ -107,6 +117,8 @@
         </div>
       <?php } ?>
     </div>
+
+
 
     
     <!-- Inclusion des scripts JavaScript pour le fonctionnement de Bootstrap et un script personnalisé -->

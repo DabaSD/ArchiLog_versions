@@ -78,5 +78,22 @@ class ArticleDao {
         return $stmt->execute();
     }
     
+    public function ajouterArticle($titre, $contenu, $categorie, $dateCreation) {
+        $sql = "INSERT INTO article (titre, contenu, categorie, dateCreation) VALUES (?, ?, ?, ?)";
+        $stmt = $this->connexion->prepare($sql);
+        $stmt->execute([$titre, $contenu, $categorie, $dateCreation]);
+
+        // Vérifiez si l'insertion a réussi
+        if ($stmt->rowCount() > 0) {
+            // Récupération de l'ID de l'article inséré
+            return $this->connexion->lastInsertId();
+        } else {
+            return false;
+        }
+    }
+
+    public function getLastInsertedId() {
+        return $this->connexion->lastInsertId();
+    }
 }
 ?>
