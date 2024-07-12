@@ -1,8 +1,10 @@
 <?php
     // Importation des classes nécessaires
     require_once  '../Model/dao/ConnexionManager.php';
-    require_once  '../Model/dao/ArticleDao.php'; 
-    require_once  '../Model/dao/CategorieDao.php'; 
+    require_once  '../Model/dao/ArticleDao.php';
+    require_once  '../Model/dao/CategorieDao.php';
+    require_once  '../Model/dao/UtilisateurDao.php';
+    require_once  '../Model/domaine/Utilisateur.php';
 
     // Définition de la classe Controller
     class Controller {
@@ -61,5 +63,62 @@
 
             require '../Vue/accueil.php'; // Inclusion de la vue accueil
         }
+
+        // Affiche la liste des utilisateurs
+        function showUtilisateurs() {
+            $utilisateurDao = new UtilisateurDao();
+            $utilisateurs = $utilisateurDao->getAllUtilisateurs();
+
+            require '../Vue/listeUtilisateur.php';
+        }
+
+        // Affiche un formulaire pour ajouter un utilisateur
+        function showAddUtilisateurForm() {
+            require '../Vue/ajouterUtilisateur.php';
+        }
+
+        // Ajoute un utilisateur
+        function ajouterUtilisateur($nom, $email, $role, $motDePasse) {
+            $utilisateurDao = new UtilisateurDao();
+            $utilisateur = new Utilisateur(null, $nom, $email, $role, $motDePasse);
+            $resultat = $utilisateurDao->ajouterUtilisateur($utilisateur);
+            if ($resultat) {
+                header('Location: ?action=showutilisateurs');
+            } else {
+                echo "Erreur lors de l'ajout de l'utilisateur.";
+            }
+        }
+
+        // Affiche un formulaire pour modifier un utilisateur
+        function showEditUtilisateurForm($id) {
+            $utilisateurDao = new UtilisateurDao();
+            $utilisateur = $utilisateurDao->getUtilisateurById($id);
+
+            require '../Vue/ajouterUtilisateur.php';
+        }
+
+        // Modifie un utilisateur
+        function mettreAJourUtilisateur($id, $nom, $email, $role, $motDePasse) {
+            $utilisateurDao = new UtilisateurDao();
+            $utilisateur = new Utilisateur($id, $nom, $email, $role, $motDePasse);
+            $resultat = $utilisateurDao->mettreAJourUtilisateur($utilisateur);
+            if ($resultat) {
+                header('Location: ?action=showutilisateurs');
+            } else {
+                echo "Erreur lors de la mise à jour de l'utilisateur.";
+            }
+        }
+
+        // Supprime un utilisateur
+        function supprimerUtilisateur($id) {
+            $utilisateurDao = new UtilisateurDao();
+            $resultat = $utilisateurDao->supprimerUtilisateur($id);
+            if ($resultat) {
+                header('Location: ?action=showutilisateurs');
+            } else {
+                echo "Erreur lors de la suppression de l'utilisateur.";
+            }
+        }
+
+
     }
-?>

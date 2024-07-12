@@ -32,6 +32,39 @@ if (isset($_GET['action'])) {
             }
             break;
 
+        // Ajout des cas pour la gestion des utilisateurs
+        case 'showutilisateurs':
+            $utilisateurs = $controller->showUtilisateurs();
+            break;
+
+        case 'addutilisateurform':
+            $controller->showAddUtilisateurForm();
+            break;
+
+        case 'ajouterutilisateur':
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $controller->ajouterUtilisateur($_POST['nom'], $_POST['email'], $_POST['role'], $_POST['motDePasse']);
+            }
+            break;
+
+        case 'editutilisateurform':
+            if (isset($_GET['id'])) {
+                $controller->showEditUtilisateurForm($_GET['id']);
+            }
+            break;
+
+        case 'mettreajourutilisateur':
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $controller->mettreAJourUtilisateur($_POST['id'], $_POST['nom'], $_POST['email'], $_POST['role'], $_POST['motDePasse']);
+            }
+            break;
+
+        case 'supprimerutilisateur':
+            if (isset($_GET['id'])) {
+                $controller->supprimerUtilisateur($_GET['id']);
+            }
+            break;
+
         default:
             // Si 'action' n'est ni 'article' ni 'categorie', affichage de la page d'accueil
             $articles = $controller->showAccueil();

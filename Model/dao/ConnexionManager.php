@@ -2,20 +2,25 @@
     // Définition de la classe ConnexionManager
     class ConnexionManager {
 
-        private $connexion; 
+        private $connexion;
+        private $dbname = "mglsi_news";
+        private $host = "localhost";
+        private $user = "mglsi_user";
+        private $pass = "passer";
+        private $dbport = "3308";
         private static $instance = null; // Instance unique de la classe (Singleton)
 
 
 
         // Constructeur de la classe
 
-        public function __construct() {
+        private function __construct() {
 
             // Création d'une nouvelle connexion PDO
             $this->connexion = new PDO(
-                "mysql:host=localhost;dbname=mglsi_news", // Chaîne de connexion
-                "mglsi_user", // Nom d'utilisateur
-                "passer" // Mot de passe
+                "mysql:host=$this->host;dbname=$this->dbname;port=$this->dbport", // Chaîne de connexion
+                $this->user, // Nom d'utilisateur
+                $this->pass // Mot de passe
             );
 
 
@@ -44,4 +49,3 @@
             return self::$instance->connexion;
         }
     }
-?>

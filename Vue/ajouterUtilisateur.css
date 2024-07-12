@@ -1,0 +1,87 @@
+/* Style général de la page */
+body {
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    color: white;
+}
+
+header {
+    background-color: #413f3f;
+    padding: 10px 0;
+    text-align: center;
+}
+
+
+/* Style du formulaire */
+form {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    width: 50%;
+    margin: auto;
+    margin-top: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Assure que padding ne déborde pas la largeur définie */
+    color: #333; /* Couleur du texte */
+}
+
+input:focus {
+    border-color: #aaa;
+    outline: none; /* Supprime l'outline par défaut lors du focus */
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+}
+
+select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    box-sizing: border-box; /* Assure que le padding ne déborde pas la largeur définie */
+    -webkit-appearance: none; /* Supprime le style par défaut pour Safari */
+    -moz-appearance: none; /* Supprime le style par défaut pour Firefox */
+    appearance: none; /* Supprime le style par défaut pour les navigateurs modernes */
+    color: #333; /* Couleur du texte */
+}
+
+/* Style pour le focus */
+select:focus {
+    border-color: #aaa;
+    outline: none; /* Supprime l'outline par défaut lors du focus */
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+}
+
+button {
+    background-color: #737473;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #414241;
+}
