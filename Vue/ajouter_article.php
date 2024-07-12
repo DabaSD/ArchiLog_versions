@@ -42,7 +42,7 @@ require_once '../Controleur/ajouter_article_controller.php';
             <!-- Champ caché pour la date de création -->
             <input type="hidden" name="date_creation" value="<?php echo date('Y-m-d H:i:s'); ?>">
             
-            <button type="submit" class="btn btn-primary">Ajouter l'article</button>
+            <button type="submit" class="btn btn-primary">Ajouter</button>
             <a href="accueil.php" class="btn btn-secondary">Annuler</a>
         </form>
 

@@ -40,6 +40,15 @@
     </div>
 </div>
 
+            <!-- Bouton Gerer un categorie -->
+            <div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <a href="liste_categories.php" class="btn btn-primary">Gérer les categories</a>
+        </div>
+    </div>
+</div>
+
 
     <!-- Conteneur principal pour les articles -->
     <div class="container mt-4" id="articlesContainer">

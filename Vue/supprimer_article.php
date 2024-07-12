@@ -14,7 +14,7 @@ if (isset($_GET['id'])) {
 
     if ($success) {
         // Redirection vers la page d'accueil ou une autre page après suppression
-        header("Location: index.php?action=articles");
+        header("Location: liste_categories.php");
         exit();
     } else {
         echo '<p>Erreur lors de la suppression de l\'article.</p>';
