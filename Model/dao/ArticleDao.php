@@ -66,5 +66,17 @@ class ArticleDao {
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_OBJ)->total;
     }
+
+
+    public function updateArticle($id, $titre, $contenu, $categorie) {
+        $sql = "UPDATE article SET titre = :titre, contenu = :contenu, categorie = :categorie, dateModification = NOW() WHERE id = :id";
+        $stmt = $this->connexion->prepare($sql);
+        $stmt->bindValue(':titre', $titre);
+        $stmt->bindValue(':contenu', $contenu);
+        $stmt->bindValue(':categorie', $categorie);
+        $stmt->bindValue(':id', $id);
+        return $stmt->execute();
+    }
+    
 }
 ?>
