@@ -57,7 +57,7 @@
                     <!-- Ajouter un lien autour du titre de l'article -->
                     <h5 class="card-title">
                     <?php if($article !== null)  { ?>
-                        <a href="index.php?action=article&id=<?php echo $article->getId(); ?>">
+                        <a href="article_detail.php?action=article&id=<?php echo $article->getId(); ?>">
                             <?php echo $article->getTitre(); ?>
                         </a>
                     </h5>

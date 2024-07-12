@@ -15,7 +15,7 @@ switch ($action) {
                 'articles' => [$article],
                 'totalPages' => 1,
                 'currentPage' => 1,
-                'categories' => [] // Assurez-vous d'ajouter 'categories' ici
+                'categories' => [] 
             ];
         } else {
             $articlesData = $controller->showAccueil(4, $page);

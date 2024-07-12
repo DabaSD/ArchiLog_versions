@@ -1,3 +1,9 @@
+<?php
+// Inclure le contrôleur pour récupérer $article et $categories
+require_once '../Controleur/article_detail_controller.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -11,12 +17,14 @@
     <?php require_once 'entete.php'; ?>
 
     <div class="article-container">
-        <h1 class="article-title"><?php echo $article->getTitre(); ?></h1>
-        <p class="article-meta"><?php echo $article->getDateCreation(); ?></p>
-        <hr>
-        <div class="article-content">
-            <?php echo $article->getContenu(); ?>
-        </div>
+    <?php if($article !== null)  { ?>
+            <h1 class="article-title"><?php echo $article->getTitre(); ?></h1>
+            <p class="article-meta"><?php echo $article->getDateCreation(); ?></p>
+            <hr>
+            <div class="article-content">
+                <?php echo $article->getContenu(); ?>
+            </div>
+        <?php } ?>
         <a href="index.php" class="btn btn-primary mt-4">Retour à l'accueil</a>
     </div>
 

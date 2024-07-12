@@ -20,7 +20,7 @@ nav a {
 .custom-card:hover {
   transform: scale(1.05);
   background-color: rgb(200, 200, 200); /* Fond jaune clair au survol */
-  border: 1px solid red ;
+  border: 1px solid rgb(99, 238, 123) ;
 }
 
 .card-title {
