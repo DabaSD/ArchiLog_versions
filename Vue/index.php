@@ -5,8 +5,10 @@ require_once  '../Controleur/Controller.php';
 // Création d'une nouvelle instance de la classe Controller
 $controller = new Controller();
 
-// Initialisation de la variable $articles
-$articles = [];
+$action = isset($_GET['action']) ? $_GET['action'] : 'accueil';
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+$articlesData = [];
 
 // Vérification si la variable 'action' est définie dans l'URL
 if (isset($_GET['action'])) {
@@ -16,21 +18,27 @@ if (isset($_GET['action'])) {
     switch ($action) {
         case 'article':
             if (isset($_GET['id'])) {
-                $articles = $controller->showArticle($_GET['id']);
+                $article = $controller->showArticle($_GET['id']);
+                $articlesData = [
+                    'articles' => [$article],
+                    'totalPages' => 1,
+                    'currentPage' => 1,
+                    'categories' => [] 
+                ];
             } else {
-                // Si 'id' n'est pas défini, affichage de la page d'accueil
-                $articles = $controller->showAccueil();
+                $articlesData = $controller->showAccueil(4, $page);
             }
             break;
-
+    
         case 'categorie':
             if (isset($_GET['id'])) {
-                $articles = $controller->showCategorie($_GET['id']);
+                $id = $_GET['id'];
+                $articlesData = $controller->showCategorie($id, 4, $page);
             } else {
-                // Si 'id' n'est pas défini, affichage de la page d'accueil
-                $articles = $controller->showAccueil();
+                $articlesData = $controller->showAccueil(4, $page);
             }
             break;
+            
 
         // Ajout des cas pour la gestion des utilisateurs
         case 'showutilisateurs':
@@ -67,11 +75,31 @@ if (isset($_GET['action'])) {
 
         default:
             // Si 'action' n'est ni 'article' ni 'categorie', affichage de la page d'accueil
-            $articles = $controller->showAccueil();
+            $articlesData = $controller->showAccueil(4, $page);
             break;
     }
+
+    // Inclure les fichiers d'entête et d'accueil uniquement pour les actions autres que la gestion des utilisateurs
+    if (!in_array($action, ['showutilisateurs', 'addutilisateurform', 'ajouterutilisateur', 'editutilisateurform', 'mettreajourutilisateur', 'supprimerutilisateur'])) {
+        $articles = $articlesData['articles'];
+        $totalPages = $articlesData['totalPages'];
+        $currentPage = $articlesData['currentPage'];
+        $categories = $articlesData['categories'];
+
+        require_once 'entete.php';
+        require_once 'accueil.php';
+    }
+
 } else {
     // Si 'action' n'est pas définie, affichage de la page d'accueil
-    $articles = $controller->showAccueil();
+    $articlesData = $controller->showAccueil(4, $page);
+    $articles = $articlesData['articles'];
+    $totalPages = $articlesData['totalPages'];
+    $currentPage = $articlesData['currentPage'];
+    $categories = $articlesData['categories'];
+
+    require_once 'entete.php';
+    require_once 'accueil.php';
 }
+
 ?>

@@ -14,12 +14,13 @@ nav a {
   background-color: whitesmoke; /* Fond jaune pour chaque carte */
   border: 1px solid #b6d8fa; /* Bordure violette */
   transition: transform 0.3s ease, background-color 0.3s ease;
+  text-align: justify; 
 }
 
 .custom-card:hover {
   transform: scale(1.05);
   background-color: rgb(200, 200, 200); /* Fond jaune clair au survol */
-  border: 1px solid red ;
+  border: 1px solid rgb(99, 238, 123) ;
 }
 
 .card-title {
@@ -34,6 +35,7 @@ nav a {
 }
 
 .small-date {
-  font-size: 10px; /* Taille de la police beaucoup plus petite */
-  color: #6c757d; /* Conserver la couleur du texte en muted */
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 10px;
 }

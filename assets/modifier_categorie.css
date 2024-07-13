@@ -1,0 +1,29 @@
+/* Exemple de styles personnalisés */
+.card {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    padding: 10px 20px;
+}
+
+.btn {
+    margin-top: 20px;
+}
+
+/* Ajoutez d'autres styles personnalisés selon vos besoins */
+
+
+h1{
+    text-align: center;
+    margin-bottom: 30px;
+    color: #007bff;
+    font-size: 2rem; /* Taille de police plus grande */
+    text-transform: uppercase; /* Texte en majuscules */
+    letter-spacing: 2px; /* Espacement des lettres */
+    font-weight: bold; /* Gras pour un meilleur contraste */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Ombre de texte pour effet de profondeur */
+}

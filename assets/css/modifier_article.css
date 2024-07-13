@@ -1,0 +1,76 @@
+/* Styles généraux */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+.row {
+    justify-content: center;
+}
+
+.col-md-8 {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #007bff;
+    font-size: 2rem; /* Taille de police plus grande */
+    text-transform: uppercase; /* Texte en majuscules */
+    letter-spacing: 2px; /* Espacement des lettres */
+    font-weight: bold; /* Gras pour un meilleur contraste */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Ombre de texte pour effet de profondeur */
+}
+
+
+.alert-danger {
+    margin-bottom: 20px;
+}
+
+/* Styles pour les formulaires */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Styles pour les boutons */
+.btn-primary,
+.btn-secondary {
+    margin-right: 10px;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .col-md-8 {
+        padding: 15px;
+    }
+}

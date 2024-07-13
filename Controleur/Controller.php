@@ -9,60 +9,95 @@
     // Définition de la classe Controller
     class Controller {
 
-        // Constructeur de la classe
+        private $articleDao;
+        private $categorieDao;
+
         public function __construct() {
-        
+            $this->articleDao = new ArticleDao();
+            $this->categorieDao = new CategorieDao();
         }
+
 
         // Méthode pour afficher la page d'accueil
-
-        public function showAccueil() {
-
-            $articleDao = new ArticleDao(); // Création d'un nouvel objet ArticleDao
-
-            $categoryDao = new CategorieDao(); // Création d'un nouvel objet CategorieDao
-
-            $articles = $articleDao->getArticles(); // Récupération de tous les articles
-
-            $categories = $categoryDao->getCategories(); // Récupération de toutes les catégories
-
-            require '../Vue/accueil.php'; // Inclusion de la vue accueil
+        public function showAccueil($limit = 4, $page = 1) {
+            $offset = ($page - 1) * $limit; // Offset pour la pagination
+        
+            // Récupération des articles paginés
+            $articles = $this->articleDao->getArticles($limit, $offset);
+            $totalArticles = $this->articleDao->getTotalArticlesCount();
+            $totalPages = ceil($totalArticles / $limit);
+        
+            // Récupération de toutes les catégories
+            $categories = $this->categorieDao->getCategories();
+        
+            // Retourner un tableau associatif avec les données nécessaires pour la vue accueil.php
+            return [
+                'articles' => $articles,
+                'categories' => $categories,
+                'totalPages' => $totalPages,
+                'currentPage' => $page // Assurez-vous que $page est bien défini et transmis
+            ];
         }
-
-
-
+        
+    
         // Méthode pour afficher un article spécifique
-
-
-        public function showArticle($id){
-            $articleDao = new ArticleDao(); // Création d'un nouvel objet ArticleDao
-
-            $categoryDao = new CategorieDao(); // Création d'un nouvel objet CategorieDao
-
-            $article = $articleDao->getArticleById($id); // Récupération de l'article par son id
-
-            $categories = $categoryDao->getCategorieById(); // Récupération de la catégorie par son id
-
-            require '../Vue/accueil.php'; // Inclusion de la vue accueil
+        public function showArticle($id) {
+            $article = $this->articleDao->getArticleById($id); // Récupération de l'article par son id
+    
+            // Vérifier si l'article existe
+            if ($article) {
+                require '../Vue/article_detail.php'; // Inclusion de la vue pour afficher les détails de l'article
+            } else {
+                // Gérer le cas où l'article n'est pas trouvé (redirection, message d'erreur, etc.)
+                echo "L'article demandé n'existe pas.";
+            }
         }
 
-
-
-        // Méthode pour afficher une catégorie spécifique
-
-
-        public function showCategorie($id){
-            
-            $articleDao = new ArticleDao(); // Création d'un nouvel objet ArticleDao
-
-            $categoryDao = new CategorieDao(); // Création d'un nouvel objet CategorieDao
-
-            $articles = $articleDao->getArticlesByCategorieId($id); // Récupération des articles par l'id de la catégorie
-
-            $categories = $categoryDao->getCategories($id); // Récupération des catégories par leur id
-
-            require '../Vue/accueil.php'; // Inclusion de la vue accueil
+    
+        public function showCategorie($id, $limit = 4, $page = 1) {
+            $articleDao = new ArticleDao();
+            $categoryDao = new CategorieDao();
+        
+            $offset = ($page - 1) * $limit;
+        
+            // Récupération des articles par catégorie avec pagination
+            $articles = $articleDao->getArticlesByCategorieId($id, $limit, $offset);
+            $totalArticles = $articleDao->getTotalArticlesCountByCategorie($id);
+            $totalPages = ceil($totalArticles / $limit);
+        
+            $categories = $categoryDao->getCategories();
+        
+            // Retourner un tableau associatif avec les données nécessaires pour la vue accueil.php
+            return [
+                'articles' => $articles,
+                'categories' => $categories,
+                'totalPages' => $totalPages,
+                'currentPage' => $page
+            ];
         }
+        
+        
+    
+    
+        public function getCategories() {
+            $categoryDao = new CategorieDao();
+            return $categoryDao->getCategories();
+        }
+    
+    
+        public function showArticleDetails($id) {
+            $article = $this->articleDao->getArticleById($id); // Récupération de l'article par son id
+        
+            // Vérifier si l'article existe
+            if ($article) {
+                return $article;
+            } else {
+                // Gérer le cas où l'article n'est pas trouvé
+                echo "L'article avec l'identifiant $id n'existe pas.";
+                return null; // Retourner null si l'article n'est pas trouvé
+            }
+        }
+
 
         // Affiche la liste des utilisateurs
         function showUtilisateurs() {
@@ -122,3 +157,6 @@
 
 
     }
+
+
+?>

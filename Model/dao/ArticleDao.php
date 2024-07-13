@@ -1,96 +1,109 @@
 <?php
-    // Importation des classes nécessaires
-    require_once '../Model/dao/ConnexionManager.php'; 
-    require_once  '../Model/domaine/Article.php'; 
-    require_once  '../Model/domaine/Categorie.php'; 
+require_once '../Model/dao/ConnexionManager.php';
+require_once '../Model/domaine/Article.php';
 
+class ArticleDao {
+    private $connexion;
 
-
-    // Définition de la classe ArticleDao
-    
-    class ArticleDao {
-        
-        private $connexion; // Variable pour stocker la connexion à la base de données
-
-        // Constructeur de la classe
-        public function __construct() {
-
-            // Récupération de la connexion à la base de données
-            $this->connexion = ConnexionManager::getConnexion();
-
-        }
-
-
-        // Méthode pour récupérer un article par son id
-
-        public function getArticleById($id) {
-
-            // Préparation de la requête SQL
-            $sql = "SELECT * FROM article WHERE id = :id";
-            $stmt = $this->connexion->prepare($sql);
-
-            // Liaison de l'id à la requête SQL
-            $stmt->bindValue(':id', $id);
-
-            // Exécution de la requête
-            $stmt->execute();
-
-            // Récupération de l'article
-            $row = $stmt->fetch();
-
-            // Retour de l'article sous forme d'objet Article
-            return new Article($row['id'], $row['titre'], $row['contenu'], $row['categorie'], $row['dateCreation'], $row['dateModification']);
-        }
-
-        // Méthode pour récupérer tous les articles
-
-        public function getArticles() {
-
-            // Préparation de la requête SQL
-            $sql = "SELECT * FROM article";
-            $stmt = $this->connexion->query($sql);
-
-            // Récupération de tous les articles
-            $rows = $stmt->fetchAll();
-            $articles = array();
-
-            // Pour chaque article, création d'un objet Article et ajout à la liste des articles
-            foreach ($rows as $row) {
-                $articles[] = new Article($row['id'], $row['titre'], $row['contenu'], $row['categorie'], $row['dateCreation'], $row['dateModification']);
-            }
-
-            // Retour de la liste des articles
-            return $articles;
-        }
-
-
-
-        // Méthode pour récupérer tous les articles d'une catégorie spécifique
-
-        public function getArticlesByCategorieId($id) {
-
-            // Préparation de la requête SQL
-            $sql = "SELECT * FROM article WHERE categorie = :id";
-            $stmt = $this->connexion->prepare($sql);
-
-            // Liaison de l'id de la catégorie à la requête SQL
-            $stmt->bindValue(':id', $id);
-
-            // Exécution de la requête
-            $stmt->execute();
-
-            // Récupération de tous les articles de la catégorie
-            $rows = $stmt->fetchAll();
-            $articles = array();
-
-            // Pour chaque article, création d'un objet Article et ajout à la liste des articles
-            foreach ($rows as $row) {
-                $articles[] = new Article($row['id'], $row['titre'], $row['contenu'], $row['categorie'], $row['dateCreation'], $row['dateModification']);
-            }
-
-            // Retour de la liste des articles de la catégorie
-            return $articles;
-        }
-
+    public function __construct() {
+        $this->connexion = ConnexionManager::getConnexion();
     }
+
+    public function getArticleById($id) {
+        $sql = "SELECT * FROM article WHERE id = :id";
+        $stmt = $this->connexion->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        $row = $stmt->fetch();
+        return new Article($row['id'], $row['titre'], $row['contenu'], $row['categorie'], $row['dateCreation'], $row['dateModification']);
+    }
+
+    public function getArticles($limit, $offset) {
+        $query = "SELECT * FROM article ORDER BY dateCreation DESC LIMIT :limit OFFSET :offset";
+        $stmt = $this->connexion->prepare($query);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC); // Utilisation de FETCH_ASSOC pour récupérer un tableau associatif
+    
+        $articles = [];
+        foreach ($rows as $row) {
+            // Création d'un nouvel objet Article en utilisant les données du tableau associatif
+            $articles[] = new Article($row['id'], $row['titre'], $row['contenu'], $row['categorie'], $row['dateCreation'], $row['dateModification']);
+        }
+    
+        return $articles;
+    }
+
+    public function getTotalArticlesCount() {
+        $query = "SELECT COUNT(*) as total FROM article";
+        $stmt = $this->connexion->query($query);
+        return $stmt->fetch(PDO::FETCH_OBJ)->total;
+    }
+
+    public function getArticlesByCategorieId($id, $limit, $offset) {
+        $sql = "SELECT * FROM article WHERE categorie = :id ORDER BY dateCreation DESC LIMIT :limit OFFSET :offset";
+        $stmt = $this->connexion->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC); // Utilisation de FETCH_ASSOC pour récupérer un tableau associatif
+    
+        $articles = [];
+        foreach ($rows as $row) {
+            // Création d'un nouvel objet Article en utilisant les données du tableau associatif
+            $articles[] = new Article($row['id'], $row['titre'], $row['contenu'], $row['categorie'], $row['dateCreation'], $row['dateModification']);
+        }
+    
+        return $articles;
+    }
+
+    public function getTotalArticlesCountByCategorie($categorieId) {
+        $query = "SELECT COUNT(*) as total FROM article WHERE categorie = :categorieId";
+        $stmt = $this->connexion->prepare($query);
+        $stmt->bindParam(':categorieId', $categorieId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_OBJ)->total;
+    }
+
+
+    public function updateArticle($id, $titre, $contenu, $categorie) {
+        $sql = "UPDATE article SET titre = :titre, contenu = :contenu, categorie = :categorie, dateModification = NOW() WHERE id = :id";
+        $stmt = $this->connexion->prepare($sql);
+        $stmt->bindValue(':titre', $titre);
+        $stmt->bindValue(':contenu', $contenu);
+        $stmt->bindValue(':categorie', $categorie);
+        $stmt->bindValue(':id', $id);
+        return $stmt->execute();
+    }
+    
+    public function ajouterArticle($titre, $contenu, $categorie, $dateCreation) {
+        $sql = "INSERT INTO article (titre, contenu, categorie, dateCreation) VALUES (?, ?, ?, ?)";
+        $stmt = $this->connexion->prepare($sql);
+        $stmt->execute([$titre, $contenu, $categorie, $dateCreation]);
+
+        // Vérifiez si l'insertion a réussi
+        if ($stmt->rowCount() > 0) {
+            // Récupération de l'ID de l'article inséré
+            return $this->connexion->lastInsertId();
+        } else {
+            return false;
+        }
+    }
+
+    public function getLastInsertedId() {
+        return $this->connexion->lastInsertId();
+    }
+
+
+
+    public function supprimerArticle($id) {
+        $sql = "DELETE FROM article WHERE id = :id";
+        $stmt = $this->connexion->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+    
+}
 ?>

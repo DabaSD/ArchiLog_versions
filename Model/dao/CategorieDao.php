@@ -1,65 +1,58 @@
 <?php
-    // Importation des classes nécessaires
-    require_once '../Model/dao/ConnexionManager.php'; 
-    require_once '../Model/domaine/Categorie.php'; 
+// Importation des classes nécessaires
+require_once '../Model/dao/ConnexionManager.php'; 
+require_once '../Model/domaine/Categorie.php'; 
 
+class CategorieDao {
+    private $connexion; 
 
-
-    // Définition de la classe CategorieDao
-    class CategorieDao {
-        private $connexion; 
-
-        // Constructeur de la classe
-        public function __construct() {
-
-            // Récupération de la connexion à la base de données
-            $this->connexion = ConnexionManager::getConnexion();
-        }
-
-
-
-
-        // Méthode pour récupérer une catégorie par son id
-
-        public function getCategorieById($id) {
-
-            // Préparation de la requête SQL
-            $sql = "SELECT * FROM categorie WHERE id = :id";
-            $stmt = $this->connexion->prepare($sql);
-
-            // Liaison de l'id à la requête SQL
-            $stmt->bindValue(':id', $id);
-
-            // Exécution de la requête
-            $stmt->execute();
-
-            // Récupération de la catégorie
-            $row = $stmt->fetch();
-
-            // Retour de la catégorie sous forme d'objet Categorie
-            return new Categorie($row['id'], $row['libelle']);
-        }
-
-
-
-        // Méthode pour récupérer toutes les catégories
-
-        public function getCategories() {
-
-            // Préparation de la requête SQL
-            $sql = "SELECT * FROM categorie";
-            $stmt = $this->connexion->query($sql);
-
-            // Récupération de toutes les catégories
-            $rows = $stmt->fetchAll();
-            $categories = array();
-
-            // Pour chaque catégorie, création d'un objet Categorie et ajout à la liste des catégories
-            foreach ($rows as $row) {
-                $categories[] = new Categorie($row['id'], $row['libelle']);
-            }
-            // Retour de la liste des catégories
-            return $categories;
-        }
+    // Constructeur de la classe
+    public function __construct() {
+        $this->connexion = ConnexionManager::getConnexion();
     }
+
+    // Méthode pour récupérer une catégorie par son id
+    public function getCategorieById($id) {
+        $sql = "SELECT * FROM categorie WHERE id = :id";
+        $stmt = $this->connexion->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        $row = $stmt->fetch();
+        return new Categorie($row['id'], $row['libelle']);
+    }
+
+    // Méthode pour récupérer toutes les catégories
+    public function getCategories() {
+        $sql = "SELECT * FROM categorie";
+        $stmt = $this->connexion->query($sql);
+        $rows = $stmt->fetchAll();
+        $categories = array();
+        foreach ($rows as $row) {
+            $categories[] = new Categorie($row['id'], $row['libelle']);
+        }
+        return $categories;
+    }
+
+    public function ajouterCategorie($libelle) {
+        $sql = "INSERT INTO categorie (libelle) VALUES (:libelle)";
+        $stmt = $this->connexion->prepare($sql);
+        $stmt->bindValue(':libelle', $libelle, PDO::PARAM_STR);
+        return $stmt->execute();
+    }
+
+    public function updateCategorie($id, $libelle) {
+        $query = "UPDATE categorie SET libelle = :libelle WHERE id = :id";
+        $stmt = $this->connexion->prepare($query);
+        $stmt->bindValue(':libelle', $libelle);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
+    public function supprimerCategorie($id) {
+        $query = "DELETE FROM categorie WHERE id = :id";
+        $stmt = $this->connexion->prepare($query);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+}
 ?>
