@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="ajouterUtilisateur.css">
+    <link rel="stylesheet" href="../assets/css/ajouterUtilisateur.css">
     <title><?= isset($utilisateur) ? "Modifier" : "Ajouter" ?> un utilisateur</title>
 </head>
 <body>

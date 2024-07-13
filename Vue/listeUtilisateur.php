@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="listeUtilisateur.css">
+    <link rel="stylesheet" href="../assets/css/listeUtilisateur.css">
     <title>Liste des utilisateurs</title>
 </head>
 <body>
