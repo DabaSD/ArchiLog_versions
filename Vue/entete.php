@@ -19,13 +19,6 @@
                     <li class="nav-item">
                         <a class="nav-link" id="accueil-link" href="index.php?action=accueil">Accueil</a>
                     </li>
-<<<<<<< HEAD
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php?action=showutilisateurs">Utilisateurs</a>
-                    </li>
-
-=======
->>>>>>> 7178525 (Version_final de la partie site web)
 
                     <!-- Vérification si la variable $categories est définie -->
                     <?php if (isset($categories)): ?>

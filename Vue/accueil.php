@@ -35,11 +35,8 @@ require_once 'index.php';
             <div class="col-md-12 text-center">
                 <a href="ajouter_article.php" class="btn btn-primary"><i class="fas fa-plus-circle mr-2"></i>Ajouter un article</a>
                 <a href="liste_categories.php" class="btn btn-primary ml-2"><i class="fas fa-list mr-2"></i>Gérer les catégories</a>
-<<<<<<< HEAD
-=======
                 <a href="index.php?action=showutilisateurs" class="btn btn-primary ml-2"><i class="fas fa-list mr-2"></i>Gérer les utilisateurs</a>
 
->>>>>>> 7178525 (Version_final de la partie site web)
             </div>
         </div>
 
