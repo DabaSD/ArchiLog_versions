@@ -7,11 +7,7 @@
         private $host = "localhost";
         private $user = "mglsi_user";
         private $pass = "passer";
-<<<<<<< HEAD
-        private $dbport = "3308";
-=======
         private $dbport = "3306";
->>>>>>> 7178525 (Version_final de la partie site web)
         private static $instance = null; // Instance unique de la classe (Singleton)
 
 
